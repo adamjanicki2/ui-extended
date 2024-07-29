@@ -1,0 +1,44 @@
+{
+  "name": "@adamjanicki/ui-extended",
+  "version": "1.0.0",
+  "description": "More advanced UI components and hooks for React in TypeScript",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "author": "Adam Janicki",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamjanicki2/ui-extended.git"
+  },
+  "scripts": {
+    "build": "tsc; cp src/style.css ./style.css",
+    "clean": "./clean.sh",
+    "dev": "nodemon --watch src --ext ts,tsx,css --exec \"npm run build\"",
+    "lint": "eslint --ext .ts,.tsx src",
+    "prepare": "npm run lint; npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "@adamjanicki/ui": ">=1.0.3",
+    "@floating-ui/react": ">=0.26.17"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "nodemon": "^3.1.4",
+    "typescript": "^5.2.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  }
+}

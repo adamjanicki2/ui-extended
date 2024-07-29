@@ -1,0 +1,42 @@
+@media (hover: hover) {
+  .ajui-autocomplete-on-option,
+  .ajui-autocomplete-option:hover {
+    background-color: var(--ajui-light-gray);
+  }
+  [data-theme="dark"] .ajui-autocomplete-on-option,
+  [data-theme="dark"] .ajui-autocomplete-option:hover {
+    background-color: var(--ajui-darkest-gray);
+  }
+}
+
+.ajui-autocomplete-popover {
+  background-color: var(--ajui-default-background);
+  font-size: 1rem;
+  font-weight: 400;
+  border: 1px solid var(--ajui-default-border);
+  overflow: hidden;
+  border-radius: var(--ajui-rounded-radius);
+}
+
+.ajui-autocomplete-ul {
+  overflow: scroll;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem;
+  margin: 0;
+}
+
+.ajui-autocomplete-default-rendering {
+  padding: 0.5rem 1rem;
+}
+
+.ajui-autocomplete-li {
+  display: flex;
+  cursor: pointer;
+  border-radius: var(--ajui-rounded-radius);
+}
+
+.ajui-autocomplete-li > :first-child {
+  border-radius: var(--ajui-rounded-radius);
+}
