@@ -1,5 +1,5 @@
 import React from "react";
-import Popover from "../Popover/Popover";
+import Popover from "./Popover";
 import ClickOutside from "@adamjanicki/ui/components/ClickOutside";
 import { IconInput } from "@adamjanicki/ui";
 import { classNames } from "@adamjanicki/ui/utils/util";
@@ -87,6 +87,10 @@ interface Props<T> {
    * Footer node to render at the bottom of the popover
    */
   footer?: React.ReactNode;
+  /**
+   * A callback to be called when the user hits the enter key while no option is selected
+   */
+  onUnselectedEnter?: () => void;
 }
 
 const defaultRenderOption = <T,>(option: T) => (
@@ -111,14 +115,19 @@ const Autocomplete = <T,>(props: Props<T>) => {
     footer,
     listItemProps = {},
     listProps = {},
+    onUnselectedEnter,
     ...rest
   } = props;
 
+  const inputContainerRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const onRef = React.useRef<HTMLLIElement>(null);
-  const nextRef = React.useRef<HTMLElement>(null);
-  const prevRef = React.useRef<HTMLElement>(null);
+  const nextRef = React.useRef<HTMLLIElement>(null);
+  const prevRef = React.useRef<HTMLLIElement>(null);
 
   const [on, setOn] = React.useState<number>();
+  const [open, setOpen] = React.useState(false);
+
   let filteredOptions = options.filter(filterOption);
   const groupMap = new Map<number, string>();
   if (groupBy) {
@@ -149,7 +158,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
     onSelect(v);
     const { current } = inputRef;
     closeMenu();
-    if (focusOnSelect) return current?.focus();
+    if (!focusOnSelect) return current?.focus();
   };
 
   const closeMenu = () => {
@@ -169,7 +178,16 @@ const Autocomplete = <T,>(props: Props<T>) => {
     if (code === "Enter") {
       const { current } = onRef;
       if (modulo > 0 && current) {
-        return current.click();
+        // Horrible heuristic to handle links
+        // It's terrible, but efficient
+        const child = current.firstChild as HTMLElement;
+        if (child && child.nodeName === "A") child.click?.();
+        current.click();
+        if (!focusOnSelect) return inputRef.current?.blur();
+      } else if (onUnselectedEnter) {
+        onUnselectedEnter();
+        closeMenu();
+        if (!focusOnSelect) return inputRef.current?.blur();
       }
     }
     if (modulo > 0 && code === "ArrowDown") {
@@ -193,10 +211,11 @@ const Autocomplete = <T,>(props: Props<T>) => {
     }
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  const inputContainerRef = React.useRef<HTMLDivElement>(null);
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const prev =
+    ((on ?? filteredOptions.length) + filteredOptions.length - 1) %
+    filteredOptions.length;
+  const next =
+    ((on ?? -1) + filteredOptions.length + 1) % filteredOptions.length;
 
   const popoverOpen = open && (filteredOptions.length > 0 || value.length > 0);
 
@@ -237,7 +256,10 @@ const Autocomplete = <T,>(props: Props<T>) => {
             margin: 0,
             width: inputContainerRef.current?.offsetWidth ?? 0,
           }}
-          className="ajui-autocomplete-popover"
+          className={classNames(
+            "ajui-autocomplete-popover",
+            popoverProps?.className
+          )}
         >
           <ul
             {...listProps}
@@ -246,12 +268,21 @@ const Autocomplete = <T,>(props: Props<T>) => {
             {filteredOptions.length
               ? filteredOptions.map((option, index) => {
                   const group = groupMap.get(index);
+                  const ref =
+                    index === on
+                      ? onRef
+                      : index === prev
+                      ? prevRef
+                      : index === next
+                      ? nextRef
+                      : undefined;
+
                   return (
                     <React.Fragment key={index}>
                       {group && (renderGroup?.(group) || group)}
                       <li
                         {...listItemProps}
-                        ref={on === index ? onRef : null}
+                        ref={ref}
                         onMouseEnter={() => setOn(index)}
                         className={classNames(
                           `ajui-autocomplete-li`,
