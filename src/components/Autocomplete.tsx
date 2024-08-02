@@ -88,6 +88,11 @@ interface Props<T> {
    */
   footer?: React.ReactNode;
   /**
+   * Close the popover when the footer is clicked
+   * @default true
+   */
+  closeOnFooterClick?: boolean;
+  /**
    * A callback to be called when the user hits the enter key while no option is selected
    */
   onUnselectedEnter?: () => void;
@@ -116,6 +121,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
     listItemProps = {},
     listProps = {},
     onUnselectedEnter,
+    closeOnFooterClick = true,
     ...rest
   } = props;
 
@@ -301,7 +307,11 @@ const Autocomplete = <T,>(props: Props<T>) => {
               : !freeSolo &&
                 (noOptionsNode || defaultRenderOption("No results found"))}
           </ul>
-          {footer}
+          {footer && (
+            <div onClick={closeOnFooterClick ? closeMenu : undefined}>
+              {footer}
+            </div>
+          )}
         </Popover>
       </div>
     </ClickOutside>
