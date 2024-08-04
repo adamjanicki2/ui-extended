@@ -1,0 +1,11 @@
+*
+# Include specific things
+!src/
+!.eslintrc.json
+!.npmignore
+!clean.sh
+!LICENSE
+!package.json
+!README.md
+!tsconfig.json
+!.gitignore
