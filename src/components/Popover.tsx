@@ -5,6 +5,7 @@ import {
   type Placement,
   offset,
   useDismiss,
+  useTransitionStyles,
 } from "@floating-ui/react";
 
 type Props = {
@@ -45,6 +46,7 @@ type Props = {
   /**
    * Whether to return focus to the trigger element when the popover is closed
    * by pressing the escape key.
+   * @default false
    */
   returnFocusOnEscape?: boolean;
 };
@@ -59,7 +61,7 @@ const Popover = (props: Props) => {
     className,
     children,
     onClose,
-    returnFocusOnEscape = true,
+    returnFocusOnEscape = false,
   } = props;
 
   const handleOnClose = () => {
@@ -80,18 +82,26 @@ const Popover = (props: Props) => {
     middleware,
   });
 
-  useDismiss(context);
-  if (!open) return null;
+  const { isMounted, styles: transitionStyles } = useTransitionStyles(context, {
+    duration: { open: 0, close: 250 }, // default ajui-transition value
+  });
 
-  return (
+  useDismiss(context);
+
+  return isMounted ? (
     <div
       ref={refs.setFloating}
-      style={{ ...(style || {}), ...floatingStyles, outline: "none" }}
+      style={{
+        ...(style || {}),
+        ...floatingStyles,
+        ...transitionStyles,
+        outline: "none",
+      }}
       className={className}
     >
       {children}
     </div>
-  );
+  ) : null;
 };
 
 export default Popover;

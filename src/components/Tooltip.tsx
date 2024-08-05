@@ -8,6 +8,7 @@ import {
   autoUpdate,
   offset,
   type Placement,
+  useTransitionStyles,
 } from "@floating-ui/react";
 
 type Props = {
@@ -70,9 +71,12 @@ const Tooltip = (props: Props) => {
   });
 
   const hover = useHover(context, {
-    delay: { open: 200, close: 100 },
     handleClose: safePolygon(),
     mouseOnly: true,
+  });
+
+  const { isMounted, styles: transitionStyles } = useTransitionStyles(context, {
+    duration: 250, // default ajui-transition value
   });
 
   const { getReferenceProps, getFloatingProps } = useInteractions([hover]);
@@ -83,10 +87,10 @@ const Tooltip = (props: Props) => {
         ref: refs.setReference,
         ...getReferenceProps(),
       })}
-      {open && (
+      {isMounted && (
         <div
           ref={refs.setFloating}
-          style={{ ...(style || {}), ...floatingStyles }}
+          style={{ ...(style || {}), ...floatingStyles, ...transitionStyles }}
           {...getFloatingProps()}
           className={className}
         >
