@@ -43,6 +43,11 @@ type Props = {
    * Whether to disable the flip behavior of the tooltip.
    */
   disableFlip?: boolean;
+  /**
+   * Whether the tooltip is disabled. If true, will not show the tooltip.
+   * @default false
+   */
+  disabled?: boolean;
 };
 
 const Tooltip = (props: Props) => {
@@ -54,6 +59,7 @@ const Tooltip = (props: Props) => {
     offset: placementOffset = 0,
     className,
     disableFlip = false,
+    disabled = false,
   } = props;
   const [open, setOpen] = useState(false);
 
@@ -80,6 +86,8 @@ const Tooltip = (props: Props) => {
   });
 
   const { getReferenceProps, getFloatingProps } = useInteractions([hover]);
+
+  if (disabled) return children;
 
   return (
     <>
