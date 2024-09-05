@@ -35,8 +35,5 @@
   display: flex;
   cursor: pointer;
   border-radius: var(--ajui-rounded-radius);
-}
-
-.ajui-autocomplete-li > :first-child {
-  border-radius: var(--ajui-rounded-radius);
+  overflow: hidden;
 }

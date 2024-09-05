@@ -2,7 +2,7 @@ import React from "react";
 import Popover from "./Popover";
 import ClickOutside from "@adamjanicki/ui/components/ClickOutside";
 import { IconInput } from "@adamjanicki/ui";
-import { classNames } from "@adamjanicki/ui/utils/util";
+import { classNames } from "@adamjanicki/ui/functions";
 
 interface Props<T> {
   /**
