@@ -35,5 +35,4 @@
   display: flex;
   cursor: pointer;
   border-radius: var(--ajui-rounded-radius);
-  overflow: hidden;
 }
