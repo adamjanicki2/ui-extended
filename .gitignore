@@ -1,6 +1,10 @@
 *
 # Include specific things
 !src/
+!site/
+!site/**/*
+site/node_modules
+site/package-lock.json
 !.eslintrc.json
 !.npmignore
 !clean.sh

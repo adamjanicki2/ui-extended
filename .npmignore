@@ -1,6 +1,7 @@
 node_modules
 src
 test
+site
 .*
 jest.config.js
 package-lock.json
