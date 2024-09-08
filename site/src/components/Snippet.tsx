@@ -26,7 +26,7 @@ const Snippet = ({ className, children, lang = "tsx" }: Props) => {
   return (
     <div
       className={classNames("snippet-container ba br2 m-auto", className)}
-      style={{ width: "max-content" }}
+      style={{ maxWidth: "100%", width: "min-content" }}
     >
       <div className="flex justify-between items-center w-100 bb ph2 pv1">
         <p className="f6 fw5 ma0">{lang}</p>
@@ -46,9 +46,14 @@ const Snippet = ({ className, children, lang = "tsx" }: Props) => {
           </Button>
         )}
       </div>
-      <pre className="pa2 ma0">
+      <pre
+        className="flex w-100 pa2 ma0"
+        style={{
+          overflow: "scroll",
+          maxHeight: "70vh",
+        }}
+      >
         <SyntaxHighlighter
-          // showLineNumbers
           style={light}
           language={lang}
           customStyle={{
