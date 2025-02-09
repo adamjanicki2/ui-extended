@@ -64,10 +64,6 @@ interface Props<T> {
    */
   freeSolo?: boolean;
   /**
-   * Focus on the input field after selecting an option
-   */
-  focusOnSelect?: boolean;
-  /**
    * Props for the input field
    */
   InputProps?: React.ComponentProps<typeof IconInput>;
@@ -96,6 +92,11 @@ interface Props<T> {
    * A callback to be called when the user hits the enter key while no option is selected
    */
   onUnselectedEnter?: () => void;
+  /**
+   * Whether or not to leave the popover open after a selection occurs
+   * @default false
+   */
+  remainOpenOnSelectOrEnter?: boolean;
 }
 
 const defaultRenderOption = <T,>(option: T) => (
@@ -112,7 +113,6 @@ const Autocomplete = <T,>(props: Props<T>) => {
     noOptionsNode,
     InputProps = {},
     freeSolo = false,
-    focusOnSelect = true,
     value,
     onInputChange,
     onSelect,
@@ -122,6 +122,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
     listProps = {},
     onUnselectedEnter,
     closeOnFooterClick = true,
+    remainOpenOnSelectOrEnter = false,
     ...rest
   } = props;
 
@@ -160,21 +161,20 @@ const Autocomplete = <T,>(props: Props<T>) => {
     filteredOptions.push(value as T);
   }
 
+  const focusInput = () => inputRef.current?.focus();
+
   const handleChange = (v: T) => {
     onSelect(v);
-    const { current } = inputRef;
-    closeMenu();
-    if (!focusOnSelect) return current?.focus();
+    if (!remainOpenOnSelectOrEnter) closeMenu();
   };
 
   const closeMenu = () => {
     setOn(undefined);
     setOpen(false);
+    inputRef.current?.blur();
   };
 
-  const openMenu = () => {
-    setOpen(true);
-  };
+  const openMenu = () => setOpen(true);
 
   const handleKeys = ({ code }: React.KeyboardEvent<HTMLDivElement>) => {
     if (code === "Escape") {
@@ -189,11 +189,9 @@ const Autocomplete = <T,>(props: Props<T>) => {
         const child = current.firstChild as HTMLElement;
         if (child && child.nodeName === "A") child.click?.();
         current.click();
-        if (!focusOnSelect) return inputRef.current?.blur();
       } else if (onUnselectedEnter) {
         onUnselectedEnter();
-        closeMenu();
-        if (!focusOnSelect) return inputRef.current?.blur();
+        if (!remainOpenOnSelectOrEnter) closeMenu();
       }
     }
     if (modulo > 0 && code === "ArrowDown") {
@@ -240,8 +238,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
               if (e.target.value) {
                 !open && openMenu();
               } else {
-                const { current } = inputRef;
-                current && current.focus();
+                focusInput();
               }
             },
             onClick: () => {
