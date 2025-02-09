@@ -1,6 +1,6 @@
 {
   "name": "@adamjanicki/ui-extended",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "More advanced UI components and hooks for React in TypeScript",
   "main": "./index.js",
   "types": "./index.d.ts",
