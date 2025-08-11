@@ -1,7 +1,7 @@
 @media (hover: hover) {
   .ajui-autocomplete-on-option,
   .ajui-autocomplete-option:hover {
-    background-color: var(--ajui-light-gray);
+    background-color: #eee;
   }
   [data-theme="dark"] .ajui-autocomplete-on-option,
   [data-theme="dark"] .ajui-autocomplete-option:hover {
