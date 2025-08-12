@@ -126,11 +126,11 @@ const Autocomplete = <T,>(props: Props<T>) => {
     ...rest
   } = props;
 
-  const inputContainerRef = React.useRef<HTMLDivElement>(null);
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const onRef = React.useRef<HTMLLIElement>(null);
-  const nextRef = React.useRef<HTMLLIElement>(null);
-  const prevRef = React.useRef<HTMLLIElement>(null);
+  const inputContainerRef = React.useRef<HTMLDivElement | null>(null);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  const onRef = React.useRef<HTMLLIElement | null>(null);
+  const nextRef = React.useRef<HTMLLIElement | null>(null);
+  const prevRef = React.useRef<HTMLLIElement | null>(null);
 
   const [on, setOn] = React.useState<number>();
   const [open, setOpen] = React.useState(false);
@@ -236,13 +236,17 @@ const Autocomplete = <T,>(props: Props<T>) => {
               setOn(undefined);
               onInputChange(e);
               if (e.target.value) {
-                !open && openMenu();
+                if (!open) {
+                  openMenu();
+                }
               } else {
                 focusInput();
               }
             },
             onClick: () => {
-              !open && openMenu();
+              if (!open) {
+                openMenu();
+              }
             },
             ref: inputRef,
             autoComplete: "off",

@@ -1,17 +1,19 @@
-*
-# Include specific things
-!src/
-!site/
-!site/**/*
-site/node_modules
-site/package-lock.json
-site/build
-!.eslintrc.json
-!.npmignore
-!clean.sh
-!LICENSE
-!package.json
-!README.md
-!tsconfig.json
-!.gitignore
-!package.json
+# dependencies
+node_modules/
+package-lock.json
+
+# demo
+build
+
+# lib
+lib/*
+
+# un-ignore src and specific files
+!lib/src/
+!lib/.npmignore
+!lib/clean.sh
+!lib/eslint.config.js
+!lib/package.json
+!lib/tsconfig.json
+!lib/LICENSE
+!lib/README.md

@@ -16,7 +16,7 @@ type Props = {
   /**
    * The trigger ref for the element to position the popover over.
    */
-  triggerRef: React.RefObject<HTMLElement>;
+  triggerRef: React.RefObject<HTMLElement | null>;
   /**
    * Whether the popover is open.
    */

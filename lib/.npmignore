@@ -1,0 +1,5 @@
+node_modules
+src
+clean.sh
+package-lock.json
+tsconfig.json

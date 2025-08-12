@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Turn as Hamburger } from "hamburger-react";
 import "src/components/nav.css";
-import { Link, UnstyledLink } from "@adamjanicki/ui";
-import { ReactComponent as Logo } from "src/images/logo.svg";
+import { Link, UnstyledLink, Hamburger } from "@adamjanicki/ui";
+import Logo from "src/images/logo.svg?react";
 
 type NavlinkProps = {
   to: string;
@@ -27,13 +26,7 @@ const Nav = () => {
           <Logo style={{ height: 32 }} className="mobile" />
         </UnstyledLink>
         <div className="mobile">
-          <Hamburger
-            toggled={open}
-            onToggle={() => setOpen(!open)}
-            direction="left"
-            size={24}
-            duration={0.3}
-          />
+          <Hamburger open={open} onClick={() => setOpen(!open)} />
         </div>
       </div>
       <ul

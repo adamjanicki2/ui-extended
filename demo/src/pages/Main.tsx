@@ -4,7 +4,7 @@ import Header from "src/components/Heading";
 import Para from "src/components/Para";
 import Snippet from "src/components/Snippet";
 import Components from "src/sections/Components";
-import { ReactComponent as Logo } from "src/images/logo.svg";
+import Logo from "src/images/logo.svg?react";
 
 const Main = () => (
   <div className="main-container">

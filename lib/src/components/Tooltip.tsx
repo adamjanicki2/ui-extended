@@ -94,7 +94,7 @@ const Tooltip = (props: Props) => {
       {cloneElement(children, {
         ref: refs.setReference,
         ...getReferenceProps(),
-      })}
+      } as any)}
       {isMounted && (
         <div
           ref={refs.setFloating}
