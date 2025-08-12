@@ -17,9 +17,9 @@ export default function HiddenSnippet(props: Props) {
         </Button>
       </div>
       <Animated
-        visible={show}
-        enter={{ style: { opacity: 1 } }}
-        exit={{ style: { opacity: 0 } }}
+        animated={show}
+        animateTo={{ style: { opacity: 1 } }}
+        animateFrom={{ style: { opacity: 0 } }}
       >
         <Snippet {...props} />
       </Animated>
