@@ -1,38 +1,38 @@
+:root {
+  --aui-autocomplete-popover-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --aui-autocomplete-highlighted: #eee;
+}
+
+[data-theme="dark"] {
+  --aui-autocomplete-popover-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --aui-autocomplete-highlighted: var(--aui-darkest-gray);
+}
+
 @media (hover: hover) {
-  .ajui-autocomplete-on-option,
-  .ajui-autocomplete-option:hover {
-    background-color: #eee;
-  }
-  [data-theme="dark"] .ajui-autocomplete-on-option,
-  [data-theme="dark"] .ajui-autocomplete-option:hover {
-    background-color: var(--ajui-darkest-gray);
+  .aui-autocomplete-on-option,
+  .aui-autocomplete-option:hover {
+    background-color: var(--aui-autocomplete-highlighted);
   }
 }
 
-.ajui-autocomplete-popover {
-  background-color: var(--ajui-default-background);
-  font-size: 1rem;
+.aui-autocomplete-popover {
+  background-color: var(--aui-default-background);
   font-weight: 400;
-  border: 1px solid var(--ajui-default-border);
+  box-shadow: 0 0 0 1px var(--aui-default-border) inset,
+    var(--aui-autocomplete-popover-box-shadow);
   overflow: hidden;
-  border-radius: var(--ajui-rounded-radius);
+  border-radius: var(--aui-rounded-radius);
 }
 
-.ajui-autocomplete-ul {
+.aui-autocomplete-ul {
   overflow: scroll;
   max-height: 300px;
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
-  margin: 0;
 }
 
-.ajui-autocomplete-default-rendering {
-  padding: 0.5rem 1rem;
-}
-
-.ajui-autocomplete-li {
+.aui-autocomplete-li {
   display: flex;
   cursor: pointer;
-  border-radius: var(--ajui-rounded-radius);
+  border-radius: var(--aui-rounded-radius);
 }

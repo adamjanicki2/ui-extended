@@ -1,10 +1,9 @@
 import React from "react";
 import Popover from "./Popover";
-import ClickOutside from "@adamjanicki/ui/components/ClickOutside";
-import { IconInput } from "@adamjanicki/ui";
+import { Box, ClickOutside, IconInput } from "@adamjanicki/ui";
 import { classNames } from "@adamjanicki/ui/functions";
 
-interface Props<T> {
+type Props<T> = {
   /**
    * The value of the input field
    */
@@ -97,10 +96,10 @@ interface Props<T> {
    * @default false
    */
   remainOpenOnSelectOrEnter?: boolean;
-}
+};
 
 const defaultRenderOption = <T,>(option: T) => (
-  <div className="ajui-autocomplete-default-rendering">{`${option}`}</div>
+  <Box className="aui-pa-m">{`${option}`}</Box>
 );
 
 const Autocomplete = <T,>(props: Props<T>) => {
@@ -168,12 +167,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
     if (!remainOpenOnSelectOrEnter) closeMenu();
   };
 
-  const closeMenu = () => {
-    setOn(undefined);
-    setOpen(false);
-    inputRef.current?.blur();
-  };
-
+  const closeMenu = () => inputRef.current?.blur();
   const openMenu = () => setOpen(true);
 
   const handleKeys = ({ code }: React.KeyboardEvent<HTMLDivElement>) => {
@@ -225,7 +219,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
 
   return (
     <ClickOutside onClickOutside={closeMenu}>
-      <div {...rest} onKeyUp={(e) => handleKeys(e)}>
+      <Box {...rest} onKeyUp={(e) => handleKeys(e)}>
         <IconInput
           {...InputProps}
           ref={inputContainerRef as any}
@@ -242,6 +236,10 @@ const Autocomplete = <T,>(props: Props<T>) => {
               } else {
                 focusInput();
               }
+            },
+            onBlur: () => {
+              setOn(undefined);
+              setOpen(false);
             },
             onClick: () => {
               if (!open) {
@@ -264,13 +262,16 @@ const Autocomplete = <T,>(props: Props<T>) => {
             width: inputContainerRef.current?.offsetWidth ?? 0,
           }}
           className={classNames(
-            "ajui-autocomplete-popover",
+            "aui-autocomplete-popover",
             popoverProps?.className
           )}
         >
           <ul
             {...listProps}
-            className={classNames("ajui-autocomplete-ul", listProps.className)}
+            className={classNames(
+              "aui-autocomplete-ul aui-pa-m aui-ma-none",
+              listProps.className
+            )}
           >
             {filteredOptions.length
               ? filteredOptions.map((option, index) => {
@@ -292,9 +293,9 @@ const Autocomplete = <T,>(props: Props<T>) => {
                         ref={ref}
                         onMouseEnter={() => setOn(index)}
                         className={classNames(
-                          `ajui-autocomplete-li`,
+                          `aui-autocomplete-li`,
                           on === index
-                            ? "ajui-autocomplete-on-option"
+                            ? "aui-autocomplete-on-option"
                             : undefined,
                           listItemProps.className
                         )}
@@ -309,12 +310,12 @@ const Autocomplete = <T,>(props: Props<T>) => {
                 (noOptionsNode || defaultRenderOption("No results found"))}
           </ul>
           {footer && (
-            <div onClick={closeOnFooterClick ? closeMenu : undefined}>
+            <Box onClick={closeOnFooterClick ? closeMenu : undefined}>
               {footer}
-            </div>
+            </Box>
           )}
         </Popover>
-      </div>
+      </Box>
     </ClickOutside>
   );
 };

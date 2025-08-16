@@ -1,4 +1,5 @@
 import React, { cloneElement, useState } from "react";
+import { Box } from "@adamjanicki/ui";
 import {
   useFloating,
   useHover,
@@ -11,7 +12,7 @@ import {
   useTransitionStyles,
 } from "@floating-ui/react";
 
-type Props = {
+type Props<T extends React.ElementType> = {
   /**
    * Children to render inside the tooltip container.
    */
@@ -20,7 +21,7 @@ type Props = {
    * The element to attach the tooltip to.
    * **IMPORTANT**: This must be able to hold a ref.
    */
-  children: React.ReactElement;
+  children: React.ReactElement<React.ComponentPropsWithRef<T>>;
   /**
    * The placement of the popover relative to the trigger element.
    * @default "bottom"
@@ -50,7 +51,7 @@ type Props = {
   disabled?: boolean;
 };
 
-const Tooltip = (props: Props) => {
+const Tooltip = <T extends React.ElementType>(props: Props<T>) => {
   const {
     children,
     tooltipContent: content,
@@ -82,7 +83,7 @@ const Tooltip = (props: Props) => {
   });
 
   const { isMounted, styles: transitionStyles } = useTransitionStyles(context, {
-    duration: 250, // default ajui-transition value
+    duration: 250, // default aui-transition value
   });
 
   const { getReferenceProps, getFloatingProps } = useInteractions([hover]);
@@ -96,14 +97,14 @@ const Tooltip = (props: Props) => {
         ...getReferenceProps(),
       } as any)}
       {isMounted && (
-        <div
+        <Box
           ref={refs.setFloating}
-          style={{ ...(style || {}), ...floatingStyles, ...transitionStyles }}
+          style={{ ...style, ...floatingStyles, ...transitionStyles }}
           {...getFloatingProps()}
           className={className}
         >
-          {content}
-        </div>
+          <>{content}</>
+        </Box>
       )}
     </>
   );
