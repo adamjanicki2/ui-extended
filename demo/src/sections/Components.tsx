@@ -221,19 +221,19 @@ export default function Components() {
         <Popover
           triggerRef={ref2}
           open={popoverOpen2}
-          className="fade bg-white b--moon-gray ba corners--rounded pa1 flex flex-column"
+          className="fade bg-white b--moon-gray ba aui-corners--rounded pa1 flex flex-column"
           onClose={() => setPopoverOpen2(false)}
           returnFocusOnEscape={false}
           placement="bottom-start"
           offset={8}
         >
-          <UnstyledButton className="pa3 br3 ajui-autocomplete-option">
+          <UnstyledButton className="pa3 br3 aui-autocomplete-option">
             Menu Item 1
           </UnstyledButton>
-          <UnstyledButton className="pa3 br3 ajui-autocomplete-option">
+          <UnstyledButton className="pa3 br3 aui-autocomplete-option">
             Menu Item 2
           </UnstyledButton>
-          <UnstyledButton className="pa3 br3 ajui-autocomplete-option">
+          <UnstyledButton className="pa3 br3 aui-autocomplete-option">
             Menu Item 3
           </UnstyledButton>
         </Popover>

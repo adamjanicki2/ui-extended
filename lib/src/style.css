@@ -1,0 +1,38 @@
+:root {
+  --aui-autocomplete-popover-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --aui-autocomplete-highlighted: #eee;
+}
+
+[data-theme="dark"] {
+  --aui-autocomplete-popover-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --aui-autocomplete-highlighted: var(--aui-darkest-gray);
+}
+
+@media (hover: hover) {
+  .aui-autocomplete-on-option,
+  .aui-autocomplete-option:hover {
+    background-color: var(--aui-autocomplete-highlighted);
+  }
+}
+
+.aui-autocomplete-popover {
+  background-color: var(--aui-default-background);
+  font-weight: 400;
+  box-shadow: 0 0 0 1px var(--aui-default-border) inset,
+    var(--aui-autocomplete-popover-box-shadow);
+  overflow: hidden;
+  border-radius: var(--aui-rounded-radius);
+}
+
+.aui-autocomplete-ul {
+  overflow: scroll;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.aui-autocomplete-li {
+  display: flex;
+  cursor: pointer;
+  border-radius: var(--aui-rounded-radius);
+}

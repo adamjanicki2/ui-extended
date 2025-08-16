@@ -1,4 +1,5 @@
 import React from "react";
+import { Box } from "@adamjanicki/ui";
 import {
   useFloating,
   autoUpdate,
@@ -16,7 +17,7 @@ type Props = {
   /**
    * The trigger ref for the element to position the popover over.
    */
-  triggerRef: React.RefObject<HTMLElement>;
+  triggerRef: React.RefObject<HTMLElement | null>;
   /**
    * Whether the popover is open.
    */
@@ -83,13 +84,13 @@ const Popover = (props: Props) => {
   });
 
   const { isMounted, styles: transitionStyles } = useTransitionStyles(context, {
-    duration: { open: 0, close: 250 }, // default ajui-transition value
+    duration: { open: 0, close: 250 }, // default aui-transition value
   });
 
   useDismiss(context);
 
   return isMounted ? (
-    <div
+    <Box
       ref={refs.setFloating}
       style={{
         ...(style || {}),
@@ -99,8 +100,8 @@ const Popover = (props: Props) => {
       }}
       className={className}
     >
-      {children}
-    </div>
+      <>{children}</>
+    </Box>
   ) : null;
 };
 
