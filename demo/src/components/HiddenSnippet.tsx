@@ -8,10 +8,10 @@ export default function HiddenSnippet(props: Props) {
     <>
       <div className="flex w-100 justify-end">
         <Button
-          className="fw6 f7 mv2"
-          style={{ padding: "3px 6px" }}
+          className="mv2"
           onClick={() => setShow(!show)}
           variant="secondary"
+          size="small"
         >
           {show ? "Hide" : "Show"} Code
         </Button>

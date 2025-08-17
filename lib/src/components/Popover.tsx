@@ -96,7 +96,6 @@ const Popover = (props: Props) => {
         ...(style || {}),
         ...floatingStyles,
         ...transitionStyles,
-        outline: "none",
       }}
       className={className}
     >

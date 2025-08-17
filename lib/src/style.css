@@ -4,7 +4,6 @@
 }
 
 [data-theme="dark"] {
-  --aui-autocomplete-popover-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   --aui-autocomplete-highlighted: var(--aui-darkest-gray);
 }
 
@@ -19,7 +18,7 @@
   background-color: var(--aui-default-background);
   font-weight: 400;
   box-shadow: 0 0 0 1px var(--aui-default-border) inset,
-    var(--aui-autocomplete-popover-box-shadow);
+    var(--aui-container-box-shadow);
   overflow: hidden;
   border-radius: var(--aui-rounded-radius);
 }
@@ -29,6 +28,7 @@
   max-height: 300px;
   display: flex;
   flex-direction: column;
+  outline: none;
 }
 
 .aui-autocomplete-li {

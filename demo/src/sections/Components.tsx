@@ -148,7 +148,6 @@ export default function Components() {
           options={fruits}
           onSelect={(value) => setValue1(value)}
           InputProps={{
-            className: "bg-white",
             inputProps: { placeholder: "Fruits" },
           }}
           popoverProps={{
@@ -171,14 +170,13 @@ export default function Components() {
           renderOption={(option) => (
             <div className="pa2">
               <span className="fw6">{option.title}</span>
-              <div className="dark-gray fw5 f6">
+              <div className="subtitle fw5 f6">
                 {option.year} | {option.rating}%
               </div>{" "}
             </div>
           )}
           InputProps={{
             startIcon: <span className="ml2">🎬</span>,
-            className: "bg-white",
             inputProps: { placeholder: "Reviews" },
           }}
           popoverProps={{
@@ -208,7 +206,7 @@ export default function Components() {
           open={popoverOpen1}
           onClose={() => setPopoverOpen1(false)}
         >
-          <div className="pa3 bg-white br3 fade">I'm a popover!</div>
+          <div className="aui-default-background pa3 br3">I'm a popover!</div>
         </Popover>
         <Button
           ref={ref2}
@@ -221,7 +219,7 @@ export default function Components() {
         <Popover
           triggerRef={ref2}
           open={popoverOpen2}
-          className="fade bg-white b--moon-gray ba aui-corners--rounded pa1 flex flex-column"
+          className="aui-default-background aui-corners--rounded pa1 flex flex-column"
           onClose={() => setPopoverOpen2(false)}
           returnFocusOnEscape={false}
           placement="bottom-start"

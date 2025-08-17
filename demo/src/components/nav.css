@@ -1,10 +1,20 @@
+:root {
+  --nav-background-color: white;
+  --nav-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --nav-background-color: var(--aui-obsidian);
+  --nav-box-shadow: 0px 4px 10px 0px rgba(120, 120, 120, 0.25);
+}
+
 .nav {
   position: sticky;
   width: 100%;
   top: 0;
-  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--nav-box-shadow);
   z-index: 1000;
-  background-color: white;
+  background-color: var(--nav-background-color);
 }
 
 .link-container {
@@ -24,7 +34,7 @@
 }
 
 .navlink {
-  color: black;
+  color: var(--aui-default-text-color);
 }
 
 @media only screen and (max-width: 768px) {
