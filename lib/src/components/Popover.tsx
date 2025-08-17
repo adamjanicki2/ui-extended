@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, classNames } from "@adamjanicki/ui";
+import { Box } from "@adamjanicki/ui";
 import {
   useFloating,
   autoUpdate,
