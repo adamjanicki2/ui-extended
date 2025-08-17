@@ -1,6 +1,6 @@
 {
   "name": "@adamjanicki/ui-extended",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "More advanced UI components and hooks for React in TypeScript",
   "main": "./index.js",
   "types": "./index.d.ts",
@@ -21,7 +21,7 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@adamjanicki/ui": "^1.5.7",
+    "@adamjanicki/ui": "^1.5.8",
     "@floating-ui/react": "^0.26.17"
   },
   "devDependencies": {

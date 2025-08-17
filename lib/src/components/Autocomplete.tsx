@@ -311,7 +311,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
           </ul>
           {footer && (
             <Box onClick={closeOnFooterClick ? closeMenu : undefined}>
-              {footer}
+              <>{footer}</>
             </Box>
           )}
         </Popover>

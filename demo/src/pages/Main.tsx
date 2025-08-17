@@ -11,7 +11,7 @@ const Main = () => (
     <h1 className="f1 tc">
       Welcome to my UI library.
       <br />
-      <em>Part 2: The Extended Edition</em>
+      <em>Redux</em>
     </h1>
     <p className="f3 fw5 tc dark-gray">
       This is a collection of complex building block components that I use in my
@@ -38,7 +38,7 @@ const Main = () => (
     </Para>
     <Snippet>{importCss}</Snippet>
     <Components />
-    <hr className="ba b--moon-gray mv3" />
+
     <Para>
       And that's it! I hope you find this little tiny library useful. If you
       want to play around with any of these components, you can head over to my{" "}
