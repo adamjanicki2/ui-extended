@@ -13,7 +13,7 @@ const Main = () => (
       <br />
       <em>Redux</em>
     </h1>
-    <p className="f3 fw5 tc dark-gray">
+    <p className="f3 fw5 tc subtitle">
       This is a collection of complex building block components that I use in my
       apps.
       <br />

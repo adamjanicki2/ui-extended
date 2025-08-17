@@ -1,3 +1,13 @@
+:root {
+  --snippet-border: var(--aui-dark-gray);
+  --snippet-background-color: #f1f8ff;
+}
+
+[data-theme="dark"] {
+  --snippet-border: var(--aui-moon-gray);
+  --snippet-background-color: black;
+}
+
 .no-bg * {
   background-color: transparent !important;
   background: none;
@@ -6,6 +16,6 @@
 .snippet-container {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  border-color: #555;
-  background-color: #f1f8ff;
+  border-color: var(--snippet-border);
+  background-color: var(--snippet-background-color);
 }

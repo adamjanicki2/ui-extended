@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@adamjanicki/ui";
+import { Box, classNames } from "@adamjanicki/ui";
 import {
   useFloating,
   autoUpdate,
@@ -96,7 +96,6 @@ const Popover = (props: Props) => {
         ...(style || {}),
         ...floatingStyles,
         ...transitionStyles,
-        outline: "none",
       }}
       className={className}
     >

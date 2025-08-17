@@ -28,6 +28,7 @@
   max-height: 300px;
   display: flex;
   flex-direction: column;
+  outline: none;
 }
 
 .aui-autocomplete-li {
