@@ -167,7 +167,11 @@ const Autocomplete = <T,>(props: Props<T>) => {
     if (!remainOpenOnSelectOrEnter) closeMenu();
   };
 
-  const closeMenu = () => inputRef.current?.blur();
+  const closeMenu = () => {
+    setOn(undefined);
+    setOpen(false);
+    inputRef.current?.blur();
+  };
   const openMenu = () => setOpen(true);
 
   const handleKeys = ({ code }: React.KeyboardEvent<HTMLDivElement>) => {
@@ -236,10 +240,6 @@ const Autocomplete = <T,>(props: Props<T>) => {
               } else {
                 focusInput();
               }
-            },
-            onBlur: () => {
-              setOn(undefined);
-              setOpen(false);
             },
             onClick: () => {
               if (!open) {

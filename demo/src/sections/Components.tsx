@@ -6,7 +6,7 @@ import {
   popoversSnippet,
   tooltipSnippet,
 } from "src/codeSnippets";
-import { Button, Link, UnstyledButton } from "@adamjanicki/ui";
+import { Button, Link, UnstyledButton, UnstyledLink } from "@adamjanicki/ui";
 import { useRef, useState } from "react";
 import { Autocomplete, Popover, Tooltip } from "@adamjanicki/ui-extended";
 
@@ -168,12 +168,17 @@ export default function Components() {
             <div className="mh2 mv1 fw7">{capitalize(group)}s</div>
           )}
           renderOption={(option) => (
-            <div className="pa2">
+            <UnstyledLink
+              className="pa2 w-100"
+              target="_blank"
+              rel="noreferrer noopener"
+              to={`https://www.adamovies.com/search?query=${option.title}`}
+            >
               <span className="fw6">{option.title}</span>
               <div className="subtitle fw5 f6">
                 {option.year} | {option.rating}%
-              </div>{" "}
-            </div>
+              </div>
+            </UnstyledLink>
           )}
           InputProps={{
             startIcon: <span className="ml2">🎬</span>,
