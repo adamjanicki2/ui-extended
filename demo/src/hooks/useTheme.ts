@@ -16,7 +16,7 @@ export const useTheme = create(
       setTheme: (theme: Theme) => set({ theme }),
     }),
     {
-      name: "ui-theme-store",
+      name: "ui-extended-theme-store",
       storage: createJSONStorage(() => localStorage),
     }
   )
