@@ -14,7 +14,8 @@
     "clean": "./clean.sh",
     "lint": "eslint src --max-warnings=0",
     "build": "npm run clean && npm run lint && tsc; cp src/style.css ./style.css",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "dryrun": "npm publish --dry-run"
   },
   "peerDependencies": {
     "react": ">=18",
