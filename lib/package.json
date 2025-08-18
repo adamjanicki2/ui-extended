@@ -22,7 +22,7 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@adamjanicki/ui": "^1.5.8",
+    "@adamjanicki/ui": "^1.5.9",
     "@floating-ui/react": "^0.26.17"
   },
   "devDependencies": {
