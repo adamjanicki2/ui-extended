@@ -29,7 +29,7 @@ const Main = () => (
       so your own stylesheets take precedence over mine.{" "}
       <em>
         Since this package depends on my{" "}
-        <Link to="/ui" target="_blank" rel="noreferrer">
+        <Link to="/ui" external>
           base UI package
         </Link>
         , you'll have to import 2 stylesheets.
@@ -42,7 +42,7 @@ const Main = () => (
     <Para>
       And that's it! I hope you find this little tiny library useful. If you
       want to play around with any of these components, you can head over to my{" "}
-      <Link to="/react-playground" target="_blank" rel="noreferrer">
+      <Link to="/react-playground" external>
         React Playground
       </Link>{" "}
       to see them in action and play around.

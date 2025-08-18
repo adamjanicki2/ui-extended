@@ -18,12 +18,7 @@ const Footer = () => {
       />
       <p className="fw5 f5">
         Est. 2024 Built from scratch by{" "}
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          className="link"
-          to="https://adamjanicki.xyz"
-        >
+        <Link external className="link" to="https://adamjanicki.xyz">
           Adam
         </Link>
       </p>
