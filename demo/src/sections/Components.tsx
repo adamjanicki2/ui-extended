@@ -132,7 +132,7 @@ export default function Components() {
         ever built; it's very large: boasting a code footprint of over 300
         lines. I mainly use it to power my search bars and searchable select
         fields on{" "}
-        <Link to="https://adamovies.com" target="_blank" rel="noreferrer">
+        <Link to="https://adamovies.com" external>
           adamovies.com
         </Link>
         . Check out these examples below on simple and more complex use cases!
@@ -170,8 +170,7 @@ export default function Components() {
           renderOption={(option) => (
             <UnstyledLink
               className="pa2 w-100"
-              target="_blank"
-              rel="noreferrer noopener"
+              external
               to={`https://www.adamovies.com/search?query=${option.title}`}
             >
               <span className="fw6">{option.title}</span>
