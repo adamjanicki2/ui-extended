@@ -90,6 +90,8 @@ const Tooltip = <T extends React.ElementType>(props: Props<T>) => {
 
   if (disabled) return children;
 
+  const { onMouseEnter, onMouseLeave } = getFloatingProps();
+
   return (
     <>
       {cloneElement(children, {
@@ -100,7 +102,7 @@ const Tooltip = <T extends React.ElementType>(props: Props<T>) => {
         <Box
           ref={refs.setFloating}
           style={{ ...style, ...floatingStyles, ...transitionStyles }}
-          {...getFloatingProps()}
+          {...({ onMouseEnter, onMouseLeave } as any)}
           className={className}
         >
           <>{content}</>
