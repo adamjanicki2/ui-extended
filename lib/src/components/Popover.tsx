@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@adamjanicki/ui";
+import Box, { BoxProps } from "@adamjanicki/ui/components/Box/Box";
 import {
   useFloating,
   autoUpdate,
@@ -8,12 +8,9 @@ import {
   useDismiss,
   useTransitionStyles,
 } from "@floating-ui/react";
+import { classNames } from "@adamjanicki/ui";
 
-type Props = {
-  /**
-   * Children to render inside the popover.
-   */
-  children: React.ReactNode | React.ReactNode[];
+type Props = BoxProps & {
   /**
    * The trigger ref for the element to position the popover over.
    */
@@ -27,14 +24,6 @@ type Props = {
    * @default "bottom"
    */
   placement?: Placement;
-  /**
-   * Additional styles to apply to the popover container.
-   */
-  style?: React.CSSProperties;
-  /**
-   * Additional classes to apply to the popover container.
-   */
-  className?: string;
   /**
    * The offset of the popover relative to the trigger element.
    * @default 0
@@ -52,17 +41,17 @@ type Props = {
   returnFocusOnEscape?: boolean;
 };
 
-const Popover = (props: Props) => {
+export const UnstyledPopover = (props: Props) => {
   const {
     triggerRef,
     open,
     placement = "bottom",
     style,
     offset: placementOffset = 0,
-    className,
     children,
     onClose,
     returnFocusOnEscape = false,
+    ...rest
   } = props;
 
   const handleOnClose = () => {
@@ -93,15 +82,23 @@ const Popover = (props: Props) => {
     <Box
       ref={refs.setFloating}
       style={{
-        ...(style || {}),
         ...floatingStyles,
         ...transitionStyles,
+        ...style,
       }}
-      className={className}
+      {...rest}
     >
       <>{children}</>
     </Box>
   ) : null;
 };
+
+const Popover = ({ className, layout, ...rest }: Props) => (
+  <UnstyledPopover
+    className={classNames("aui-popover", className)}
+    layout={{ padding: "s", ...layout }}
+    {...rest}
+  />
+);
 
 export default Popover;

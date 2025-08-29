@@ -114,15 +114,15 @@ export const tooltipSnippet = `
 import { Tooltip } from "@adamjanicki/ui-extended";
 
 <Tooltip tooltipContent="I'm a tooltip!" offset={2} placement="left">
-  <div className="bg-dark-red">Left</div>
+  <div>Left</div>
 </Tooltip>
 <Tooltip tooltipContent="I'm a tooltip!" offset={2} placement="top">
-  <div className="bg-dark-green">Top</div>
+  <div>Top</div>
 </Tooltip>
 <Tooltip tooltipContent="I'm a tooltip!" offset={2} placement="bottom">
-  <div className="bg-blue">Bottom</div>
+  <div>Bottom</div>
 </Tooltip>
 <Tooltip tooltipContent="I'm a tooltip!" offset={2} placement="right">
-  <div className="bg-purple">Right</div>
+  <div>Right</div>
 </Tooltip>
 `;

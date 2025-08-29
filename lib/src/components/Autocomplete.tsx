@@ -99,7 +99,7 @@ type Props<T> = {
 };
 
 const defaultRenderOption = <T,>(option: T) => (
-  <Box className="aui-pa-m">{`${option}`}</Box>
+  <Box layout={{ padding: "s" }}>{`${option}`}</Box>
 );
 
 const Autocomplete = <T,>(props: Props<T>) => {
@@ -128,8 +128,6 @@ const Autocomplete = <T,>(props: Props<T>) => {
   const inputContainerRef = React.useRef<HTMLDivElement | null>(null);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const onRef = React.useRef<HTMLLIElement | null>(null);
-  const nextRef = React.useRef<HTMLLIElement | null>(null);
-  const prevRef = React.useRef<HTMLLIElement | null>(null);
 
   const [on, setOn] = React.useState<number>();
   const [open, setOpen] = React.useState(false);
@@ -179,9 +177,12 @@ const Autocomplete = <T,>(props: Props<T>) => {
       closeMenu();
     }
     const modulo = filteredOptions.length;
+    if (modulo <= 0) {
+      return;
+    }
     if (code === "Enter") {
       const { current } = onRef;
-      if (modulo > 0 && current) {
+      if (current) {
         // Horrible heuristic to handle links
         // It's terrible, but efficient
         const child = current.firstChild as HTMLElement;
@@ -192,32 +193,19 @@ const Autocomplete = <T,>(props: Props<T>) => {
         if (!remainOpenOnSelectOrEnter) closeMenu();
       }
     }
-    if (modulo > 0 && code === "ArrowDown") {
-      const newOn = ((on !== undefined ? on : -1) + 1) % modulo;
-      setOn(newOn);
-      if (nextRef.current) {
-        nextRef.current.scrollIntoView({
-          block: "nearest",
-          behavior: "smooth",
-        });
-      }
-    } else if (modulo > 0 && code === "ArrowUp") {
-      const newOn = ((on !== undefined ? on : 0) - 1 + modulo) % modulo;
-      setOn(newOn);
-      if (prevRef.current) {
-        prevRef.current.scrollIntoView({
-          block: "nearest",
-          behavior: "smooth",
-        });
-      }
+    if (code === "ArrowDown") {
+      setOn((on) => ((on ?? -1) + 1) % modulo);
+    } else if (code === "ArrowUp") {
+      setOn((on) => ((on ?? 0) - 1 + modulo) % modulo);
     }
   };
 
-  const prev =
-    ((on ?? filteredOptions.length) + filteredOptions.length - 1) %
-    filteredOptions.length;
-  const next =
-    ((on ?? -1) + filteredOptions.length + 1) % filteredOptions.length;
+  React.useEffect(() => {
+    onRef.current?.scrollIntoView({
+      block: "nearest",
+      behavior: "smooth",
+    });
+  }, [on]);
 
   const popoverOpen = open && (filteredOptions.length > 0 || value.length > 0);
 
@@ -254,11 +242,9 @@ const Autocomplete = <T,>(props: Props<T>) => {
           {...popoverProps}
           open={popoverOpen}
           triggerRef={inputContainerRef}
+          layout={{ padding: "none", margin: "none" }}
           style={{
-            zIndex: 100,
-            ...(popoverProps?.style || {}),
-            padding: 0,
-            margin: 0,
+            ...popoverProps?.style,
             width: inputContainerRef.current?.offsetWidth ?? 0,
           }}
           className={classNames(
@@ -269,21 +255,14 @@ const Autocomplete = <T,>(props: Props<T>) => {
           <ul
             {...listProps}
             className={classNames(
-              "aui-autocomplete-ul aui-pa-m aui-ma-none",
+              "aui-autocomplete-ul aui-pa-s aui-ma-none",
               listProps.className
             )}
           >
             {filteredOptions.length
               ? filteredOptions.map((option, index) => {
                   const group = groupMap.get(index);
-                  const ref =
-                    index === on
-                      ? onRef
-                      : index === prev
-                      ? prevRef
-                      : index === next
-                      ? nextRef
-                      : undefined;
+                  const ref = index === on ? onRef : undefined;
 
                   return (
                     <React.Fragment key={index}>
@@ -309,7 +288,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
               : !freeSolo &&
                 (noOptionsNode || defaultRenderOption("No results found"))}
           </ul>
-          {footer && (
+          {!!footer && (
             <Box onClick={closeOnFooterClick ? closeMenu : undefined}>
               <>{footer}</>
             </Box>

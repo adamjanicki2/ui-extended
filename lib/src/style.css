@@ -1,5 +1,4 @@
 :root {
-  --aui-autocomplete-popover-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   --aui-autocomplete-highlighted: #eee;
 }
 
@@ -15,12 +14,9 @@
 }
 
 .aui-autocomplete-popover {
-  background-color: var(--aui-default-background);
   font-weight: 400;
-  box-shadow: 0 0 0 1px var(--aui-default-border) inset,
-    var(--aui-container-box-shadow);
   overflow: hidden;
-  border-radius: var(--aui-rounded-radius);
+  padding: 0;
 }
 
 .aui-autocomplete-ul {
@@ -35,4 +31,13 @@
   display: flex;
   cursor: pointer;
   border-radius: var(--aui-rounded-radius);
+}
+
+.aui-tooltip,
+.aui-popover {
+  background-color: var(--aui-default-background);
+  border: 1px solid var(--aui-default-border);
+  box-shadow: var(--aui-floating-box-shadow);
+  border-radius: var(--aui-rounded-radius);
+  z-index: 1000;
 }

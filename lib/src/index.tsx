@@ -1,4 +1,5 @@
 // Components
-export { default as Popover } from "./components/Popover";
-export { default as Tooltip } from "./components/Tooltip";
+import Tooltip, { UnstyledTooltip } from "./components/Tooltip";
+import Popover, { UnstyledPopover } from "./components/Popover";
+export { Tooltip, UnstyledTooltip, Popover, UnstyledPopover };
 export { default as Autocomplete } from "./components/Autocomplete";
