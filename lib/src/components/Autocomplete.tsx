@@ -177,9 +177,12 @@ const Autocomplete = <T,>(props: Props<T>) => {
       closeMenu();
     }
     const modulo = filteredOptions.length;
+    if (modulo <= 0) {
+      return;
+    }
     if (code === "Enter") {
       const { current } = onRef;
-      if (modulo > 0 && current) {
+      if (current) {
         // Horrible heuristic to handle links
         // It's terrible, but efficient
         const child = current.firstChild as HTMLElement;
@@ -190,9 +193,9 @@ const Autocomplete = <T,>(props: Props<T>) => {
         if (!remainOpenOnSelectOrEnter) closeMenu();
       }
     }
-    if (modulo > 0 && code === "ArrowDown") {
+    if (code === "ArrowDown") {
       setOn((on) => ((on ?? -1) + 1) % modulo);
-    } else if (modulo > 0 && code === "ArrowUp") {
+    } else if (code === "ArrowUp") {
       setOn((on) => ((on ?? 0) - 1 + modulo) % modulo);
     }
   };
