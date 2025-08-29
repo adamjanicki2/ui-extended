@@ -99,7 +99,7 @@ type Props<T> = {
 };
 
 const defaultRenderOption = <T,>(option: T) => (
-  <Box layout={{ padding: "m" }}>{`${option}`}</Box>
+  <Box layout={{ padding: "s" }}>{`${option}`}</Box>
 );
 
 const Autocomplete = <T,>(props: Props<T>) => {
