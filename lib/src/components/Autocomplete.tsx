@@ -191,9 +191,9 @@ const Autocomplete = <T,>(props: Props<T>) => {
       }
     }
     if (modulo > 0 && code === "ArrowDown") {
-      setOn(((on ?? -1) + 1) % modulo);
+      setOn((on) => ((on ?? -1) + 1) % modulo);
     } else if (modulo > 0 && code === "ArrowUp") {
-      setOn(((on ?? 0) - 1 + modulo) % modulo);
+      setOn((on) => ((on ?? 0) - 1 + modulo) % modulo);
     }
   };
 
