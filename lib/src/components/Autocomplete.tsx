@@ -254,9 +254,8 @@ const Autocomplete = <T,>(props: Props<T>) => {
           {...popoverProps}
           open={popoverOpen}
           triggerRef={inputContainerRef}
+          layout={{ padding: "none", margin: "none" }}
           style={{
-            padding: 0,
-            margin: 0,
             ...popoverProps?.style,
             width: inputContainerRef.current?.offsetWidth ?? 0,
           }}
