@@ -36,8 +36,8 @@
 .aui-tooltip,
 .aui-popover {
   background-color: var(--aui-default-background);
-  box-shadow: 0 0 0 1px var(--aui-default-border) inset,
-    var(--aui-floating-box-shadow);
+  border: 1px solid var(--aui-default-border);
+  box-shadow: var(--aui-floating-box-shadow);
   border-radius: var(--aui-rounded-radius);
   z-index: 1000;
 }

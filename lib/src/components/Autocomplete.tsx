@@ -128,8 +128,6 @@ const Autocomplete = <T,>(props: Props<T>) => {
   const inputContainerRef = React.useRef<HTMLDivElement | null>(null);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const onRef = React.useRef<HTMLLIElement | null>(null);
-  const nextRef = React.useRef<HTMLLIElement | null>(null);
-  const prevRef = React.useRef<HTMLLIElement | null>(null);
 
   const [on, setOn] = React.useState<number>();
   const [open, setOpen] = React.useState(false);
@@ -193,31 +191,18 @@ const Autocomplete = <T,>(props: Props<T>) => {
       }
     }
     if (modulo > 0 && code === "ArrowDown") {
-      const newOn = ((on !== undefined ? on : -1) + 1) % modulo;
-      setOn(newOn);
-      if (nextRef.current) {
-        nextRef.current.scrollIntoView({
-          block: "nearest",
-          behavior: "smooth",
-        });
-      }
+      setOn(((on ?? -1) + 1) % modulo);
     } else if (modulo > 0 && code === "ArrowUp") {
-      const newOn = ((on !== undefined ? on : 0) - 1 + modulo) % modulo;
-      setOn(newOn);
-      if (prevRef.current) {
-        prevRef.current.scrollIntoView({
-          block: "nearest",
-          behavior: "smooth",
-        });
-      }
+      setOn(((on ?? 0) - 1 + modulo) % modulo);
     }
   };
 
-  const prev =
-    ((on ?? filteredOptions.length) + filteredOptions.length - 1) %
-    filteredOptions.length;
-  const next =
-    ((on ?? -1) + filteredOptions.length + 1) % filteredOptions.length;
+  React.useEffect(() => {
+    onRef.current?.scrollIntoView({
+      block: "nearest",
+      behavior: "smooth",
+    });
+  }, [on]);
 
   const popoverOpen = open && (filteredOptions.length > 0 || value.length > 0);
 
@@ -274,14 +259,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
             {filteredOptions.length
               ? filteredOptions.map((option, index) => {
                   const group = groupMap.get(index);
-                  const ref =
-                    index === on
-                      ? onRef
-                      : index === prev
-                      ? prevRef
-                      : index === next
-                      ? nextRef
-                      : undefined;
+                  const ref = index === on ? onRef : undefined;
 
                   return (
                     <React.Fragment key={index}>
