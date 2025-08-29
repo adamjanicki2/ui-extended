@@ -99,7 +99,7 @@ type Props<T> = {
 };
 
 const defaultRenderOption = <T,>(option: T) => (
-  <Box className="aui-pa-m">{`${option}`}</Box>
+  <Box layout={{ padding: "m" }}>{`${option}`}</Box>
 );
 
 const Autocomplete = <T,>(props: Props<T>) => {
@@ -255,10 +255,9 @@ const Autocomplete = <T,>(props: Props<T>) => {
           open={popoverOpen}
           triggerRef={inputContainerRef}
           style={{
-            zIndex: 100,
-            ...(popoverProps?.style || {}),
             padding: 0,
             margin: 0,
+            ...popoverProps?.style,
             width: inputContainerRef.current?.offsetWidth ?? 0,
           }}
           className={classNames(
@@ -269,7 +268,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
           <ul
             {...listProps}
             className={classNames(
-              "aui-autocomplete-ul aui-pa-m aui-ma-none",
+              "aui-autocomplete-ul aui-pa-s aui-ma-none",
               listProps.className
             )}
           >
@@ -309,7 +308,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
               : !freeSolo &&
                 (noOptionsNode || defaultRenderOption("No results found"))}
           </ul>
-          {footer && (
+          {!!footer && (
             <Box onClick={closeOnFooterClick ? closeMenu : undefined}>
               <>{footer}</>
             </Box>

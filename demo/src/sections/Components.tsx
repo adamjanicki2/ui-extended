@@ -6,7 +6,14 @@ import {
   popoversSnippet,
   tooltipSnippet,
 } from "src/codeSnippets";
-import { Button, Link, UnstyledButton, UnstyledLink } from "@adamjanicki/ui";
+import {
+  Button,
+  Link,
+  UnstyledButton,
+  UnstyledLink,
+  Box,
+  Icon,
+} from "@adamjanicki/ui";
 import { useRef, useState } from "react";
 import { Autocomplete, Popover, Tooltip } from "@adamjanicki/ui-extended";
 
@@ -180,7 +187,7 @@ export default function Components() {
             </UnstyledLink>
           )}
           InputProps={{
-            startIcon: <span className="ml2">🎬</span>,
+            startIcon: <Icon icon="ticket" size="m" className="ml2" />,
             inputProps: { placeholder: "Reviews" },
           }}
           popoverProps={{
@@ -210,7 +217,7 @@ export default function Components() {
           open={popoverOpen1}
           onClose={() => setPopoverOpen1(false)}
         >
-          <div className="aui-default-background pa3 br3">I'm a popover!</div>
+          I'm a popover!
         </Popover>
         <Button
           ref={ref2}
@@ -223,7 +230,7 @@ export default function Components() {
         <Popover
           triggerRef={ref2}
           open={popoverOpen2}
-          className="aui-default-background aui-corners--rounded pa1 flex flex-column"
+          layout={{ axis: "y" }}
           onClose={() => setPopoverOpen2(false)}
           returnFocusOnEscape={false}
           placement="bottom-start"
@@ -249,20 +256,28 @@ export default function Components() {
         element without taking up too much space in your main UI. Check out the
         examples below!
       </Para>
-      <div className="flex items-center flex-wrap justify-center">
+      <Box layout={{ axis: "x", align: "center", justify: "center", gap: "m" }}>
         <Tooltip tooltipContent="I'm a tooltip!" offset={2} placement="left">
-          <div className="pa2 ma1 br2 white bg-dark-red">Left</div>
+          <Box layout={{ axis: "x", align: "center", gap: "xs" }}>
+            <Icon icon="arrow-left" /> Left
+          </Box>
         </Tooltip>
         <Tooltip tooltipContent="I'm a tooltip!" offset={2} placement="top">
-          <div className="pa2 ma1 br2 white bg-dark-green">Top</div>
+          <Box layout={{ axis: "x", align: "center", gap: "xs" }}>
+            <Icon icon="arrow-up" /> Top
+          </Box>
         </Tooltip>
         <Tooltip tooltipContent="I'm a tooltip!" offset={2} placement="bottom">
-          <div className="pa2 ma1 br2 white bg-blue">Bottom</div>
+          <Box layout={{ axis: "x", align: "center", gap: "xs" }}>
+            <Icon icon="arrow-down" /> Bottom
+          </Box>
         </Tooltip>
         <Tooltip tooltipContent="I'm a tooltip!" offset={2} placement="right">
-          <div className="pa2 ma1 br2 white bg-purple">Right</div>
+          <Box layout={{ axis: "x", align: "center", gap: "xs" }}>
+            <Icon icon="arrow-right" /> Right
+          </Box>
         </Tooltip>
-      </div>
+      </Box>
       <HiddenSnippet>{tooltipSnippet}</HiddenSnippet>
     </section>
   );

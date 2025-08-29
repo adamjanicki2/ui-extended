@@ -1,5 +1,5 @@
 import React, { cloneElement, useState } from "react";
-import { Box } from "@adamjanicki/ui";
+import Box, { BoxProps } from "@adamjanicki/ui/components/Box/Box";
 import {
   useFloating,
   useHover,
@@ -11,8 +11,9 @@ import {
   type Placement,
   useTransitionStyles,
 } from "@floating-ui/react";
+import { classNames } from "@adamjanicki/ui";
 
-type Props<T extends React.ElementType> = {
+type Props = Omit<BoxProps, "children" | "onMouseEnter" | "onMouseLeave"> & {
   /**
    * Children to render inside the tooltip container.
    */
@@ -21,20 +22,12 @@ type Props<T extends React.ElementType> = {
    * The element to attach the tooltip to.
    * **IMPORTANT**: This must be able to hold a ref.
    */
-  children: React.ReactElement<React.ComponentPropsWithRef<T>>;
+  children: React.ReactElement<any>;
   /**
    * The placement of the popover relative to the trigger element.
    * @default "bottom"
    */
   placement?: Placement;
-  /**
-   * Additional styles to apply to the tooltip container.
-   */
-  style?: React.CSSProperties;
-  /**
-   * Additional classes to apply to the tooltip container.
-   */
-  className?: string;
   /**
    * The offset of the popover relative to the trigger element.
    * @default 0
@@ -51,16 +44,16 @@ type Props<T extends React.ElementType> = {
   disabled?: boolean;
 };
 
-const Tooltip = <T extends React.ElementType>(props: Props<T>) => {
+export const UnstyledTooltip = (props: Props) => {
   const {
     children,
     tooltipContent: content,
     placement = "bottom",
     style,
     offset: placementOffset = 0,
-    className,
     disableFlip = false,
     disabled = false,
+    ...rest
   } = props;
   const [open, setOpen] = useState(false);
 
@@ -97,13 +90,13 @@ const Tooltip = <T extends React.ElementType>(props: Props<T>) => {
       {cloneElement(children, {
         ref: refs.setReference,
         ...getReferenceProps(),
-      } as any)}
+      })}
       {isMounted && (
         <Box
           ref={refs.setFloating}
-          style={{ ...style, ...floatingStyles, ...transitionStyles }}
+          style={{ ...floatingStyles, ...transitionStyles, ...style }}
           {...({ onMouseEnter, onMouseLeave } as any)}
-          className={className}
+          {...rest}
         >
           <>{content}</>
         </Box>
@@ -111,5 +104,13 @@ const Tooltip = <T extends React.ElementType>(props: Props<T>) => {
     </>
   );
 };
+
+export const Tooltip = ({ className, layout, ...rest }: Props) => (
+  <UnstyledTooltip
+    className={classNames("aui-tooltip", className)}
+    layout={{ padding: "s", ...layout }}
+    {...rest}
+  />
+);
 
 export default Tooltip;
