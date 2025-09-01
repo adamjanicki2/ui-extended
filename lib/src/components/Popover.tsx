@@ -75,7 +75,7 @@ export const UnstyledPopover = (props: Props) => {
     duration: { open: 0, close: 250 }, // default aui-transition value
   });
 
-  useDismiss(context, { bubbles: false });
+  useDismiss(context);
 
   return isMounted ? (
     <Box
