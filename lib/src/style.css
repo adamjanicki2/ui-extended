@@ -12,17 +12,3 @@
     background-color: var(--aui-autocomplete-highlighted);
   }
 }
-
-.aui-autocomplete-ul {
-  overflow: scroll;
-  max-height: 300px;
-  display: flex;
-  flex-direction: column;
-  outline: none;
-}
-
-.aui-autocomplete-li {
-  display: flex;
-  cursor: pointer;
-  border-radius: var(--aui-radius-rounded);
-}
