@@ -61,7 +61,7 @@ type Props<T> = {
   /**
    * Allow free text input
    */
-  freeSolo?: boolean;
+  customize?: boolean;
   /**
    * Props for the input field
    */
@@ -111,7 +111,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
     renderGroup,
     noOptionsNode,
     InputProps = {},
-    freeSolo = false,
+    customize = false,
     value,
     onInputChange,
     onSelect,
@@ -154,7 +154,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
       })
       .flat();
   }
-  if (freeSolo && value.length > 0 && filteredOptions.length === 0) {
+  if (customize && value.length > 0 && filteredOptions.length === 0) {
     filteredOptions.push(value as T);
   }
 
@@ -184,10 +184,9 @@ const Autocomplete = <T,>(props: Props<T>) => {
       const { current } = onRef;
       if (current) {
         // Horrible heuristic to handle links
-        // It's terrible, but efficient
-        const child = current.firstChild as HTMLElement;
-        if (child && child.nodeName === "A") child.click?.();
-        current.click();
+        // It's terrible, but speedy
+        const child = current.firstChild as HTMLElement | null;
+        child?.click?.();
       } else if (onUnselectedEnter) {
         onUnselectedEnter();
         if (!remainOpenOnSelectOrEnter) closeMenu();
@@ -297,7 +296,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
                       </React.Fragment>
                     );
                   })
-                : !freeSolo &&
+                : !customize &&
                   (noOptionsNode || defaultRenderOption("No results found"))}
             </>
           </ui.ul>
