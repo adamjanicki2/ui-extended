@@ -13,12 +13,6 @@
   }
 }
 
-.aui-autocomplete-popover {
-  font-weight: 400;
-  overflow: hidden;
-  padding: 0;
-}
-
 .aui-autocomplete-ul {
   overflow: scroll;
   max-height: 300px;
@@ -30,14 +24,5 @@
 .aui-autocomplete-li {
   display: flex;
   cursor: pointer;
-  border-radius: var(--aui-rounded-radius);
-}
-
-.aui-tooltip,
-.aui-popover {
-  background-color: var(--aui-default-background);
-  border: 1px solid var(--aui-default-border);
-  box-shadow: var(--aui-floating-box-shadow);
-  border-radius: var(--aui-rounded-radius);
-  z-index: 1000;
+  border-radius: var(--aui-radius-rounded);
 }

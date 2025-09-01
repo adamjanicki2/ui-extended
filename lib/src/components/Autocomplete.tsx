@@ -99,7 +99,7 @@ type Props<T> = {
 };
 
 const defaultRenderOption = <T,>(option: T) => (
-  <Box layout={{ padding: "s" }}>{`${option}`}</Box>
+  <Box vfx={{ padding: "s" }}>{`${option}`}</Box>
 );
 
 const Autocomplete = <T,>(props: Props<T>) => {
@@ -242,15 +242,16 @@ const Autocomplete = <T,>(props: Props<T>) => {
           {...popoverProps}
           open={popoverOpen}
           triggerRef={inputContainerRef}
-          layout={{ padding: "none", margin: "none" }}
+          vfx={{
+            padding: "none",
+            margin: "none",
+            overflow: "hidden",
+            fontWeight: 4,
+          }}
           style={{
             ...popoverProps?.style,
             width: inputContainerRef.current?.offsetWidth ?? 0,
           }}
-          className={classNames(
-            "aui-autocomplete-popover",
-            popoverProps?.className
-          )}
         >
           <ul
             {...listProps}
@@ -258,6 +259,7 @@ const Autocomplete = <T,>(props: Props<T>) => {
               "aui-autocomplete-ul aui-pa-s aui-ma-none",
               listProps.className
             )}
+            tabIndex={-1}
           >
             {filteredOptions.length
               ? filteredOptions.map((option, index) => {

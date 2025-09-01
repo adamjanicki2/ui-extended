@@ -28,11 +28,11 @@ const Snippet = ({ className, children, lang = "tsx" }: Props) => {
 
   return (
     <Box
-      layout={{ marginX: "auto", maxWidth: "full", width: "min" }}
+      vfx={{ marginX: "auto", maxWidth: "full", width: "min" }}
       className={classNames("snippet-container ba br2", className)}
     >
       <Box
-        layout={{
+        vfx={{
           axis: "x",
           align: "center",
           justify: "between",
@@ -45,7 +45,7 @@ const Snippet = ({ className, children, lang = "tsx" }: Props) => {
         <p className="f6 fw5 ma0">{lang}</p>
         {copied ? (
           <Badge
-            layout={{ axis: "x", align: "center", gap: "xs" }}
+            vfx={{ axis: "x", align: "center", gap: "xs" }}
             className="flex items-center"
             type="success"
           >
@@ -53,7 +53,7 @@ const Snippet = ({ className, children, lang = "tsx" }: Props) => {
           </Badge>
         ) : (
           <Button
-            layout={{ axis: "x", align: "center", gap: "xs" }}
+            vfx={{ axis: "x", align: "center", gap: "xs" }}
             onClick={copyCode}
             size="small"
             variant="secondary"

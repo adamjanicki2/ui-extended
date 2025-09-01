@@ -8,7 +8,6 @@ import {
   useDismiss,
   useTransitionStyles,
 } from "@floating-ui/react";
-import { classNames } from "@adamjanicki/ui";
 
 type Props = BoxProps & {
   /**
@@ -76,7 +75,7 @@ export const UnstyledPopover = (props: Props) => {
     duration: { open: 0, close: 250 }, // default aui-transition value
   });
 
-  useDismiss(context);
+  useDismiss(context, { bubbles: false });
 
   return isMounted ? (
     <Box
@@ -93,10 +92,17 @@ export const UnstyledPopover = (props: Props) => {
   ) : null;
 };
 
-const Popover = ({ className, layout, ...rest }: Props) => (
+const Popover = ({ vfx, ...rest }: Props) => (
   <UnstyledPopover
-    className={classNames("aui-popover", className)}
-    layout={{ padding: "s", ...layout }}
+    vfx={{
+      padding: "s",
+      backgroundColor: "default",
+      border: true,
+      shadow: "floating",
+      radius: "rounded",
+      z: "floating",
+      ...vfx,
+    }}
     {...rest}
   />
 );

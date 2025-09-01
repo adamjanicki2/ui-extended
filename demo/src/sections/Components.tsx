@@ -230,7 +230,7 @@ export default function Components() {
         <Popover
           triggerRef={ref2}
           open={popoverOpen2}
-          layout={{ axis: "y" }}
+          vfx={{ axis: "y" }}
           onClose={() => setPopoverOpen2(false)}
           returnFocusOnEscape={false}
           placement="bottom-start"
@@ -256,24 +256,24 @@ export default function Components() {
         element without taking up too much space in your main UI. Check out the
         examples below!
       </Para>
-      <Box layout={{ axis: "x", align: "center", justify: "center", gap: "m" }}>
+      <Box vfx={{ axis: "x", align: "center", justify: "center", gap: "m" }}>
         <Tooltip tooltipContent="I'm a tooltip!" offset={2} placement="left">
-          <Box layout={{ axis: "x", align: "center", gap: "xs" }}>
+          <Box vfx={{ axis: "x", align: "center", gap: "xs" }}>
             <Icon icon="arrow-left" /> Left
           </Box>
         </Tooltip>
         <Tooltip tooltipContent="I'm a tooltip!" offset={2} placement="top">
-          <Box layout={{ axis: "x", align: "center", gap: "xs" }}>
+          <Box vfx={{ axis: "x", align: "center", gap: "xs" }}>
             <Icon icon="arrow-up" /> Top
           </Box>
         </Tooltip>
         <Tooltip tooltipContent="I'm a tooltip!" offset={2} placement="bottom">
-          <Box layout={{ axis: "x", align: "center", gap: "xs" }}>
+          <Box vfx={{ axis: "x", align: "center", gap: "xs" }}>
             <Icon icon="arrow-down" /> Bottom
           </Box>
         </Tooltip>
         <Tooltip tooltipContent="I'm a tooltip!" offset={2} placement="right">
-          <Box layout={{ axis: "x", align: "center", gap: "xs" }}>
+          <Box vfx={{ axis: "x", align: "center", gap: "xs" }}>
             <Icon icon="arrow-right" /> Right
           </Box>
         </Tooltip>

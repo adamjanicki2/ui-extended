@@ -24,7 +24,7 @@ body {
   overscroll-behavior: none;
   background-color: var(--background-color);
   overflow-x: hidden;
-  color: var(--aui-default-text-color);
+  color: var(--aui-color-default);
 }
 
 code {
