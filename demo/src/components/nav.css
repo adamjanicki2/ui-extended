@@ -34,7 +34,7 @@
 }
 
 .navlink {
-  color: var(--aui-default-text-color);
+  color: var(--aui-color-default);
 }
 
 @media only screen and (max-width: 768px) {

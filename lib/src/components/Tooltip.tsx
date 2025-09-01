@@ -11,7 +11,6 @@ import {
   type Placement,
   useTransitionStyles,
 } from "@floating-ui/react";
-import { classNames } from "@adamjanicki/ui";
 
 type Props = Omit<BoxProps, "children" | "onMouseEnter" | "onMouseLeave"> & {
   /**
@@ -105,10 +104,17 @@ export const UnstyledTooltip = (props: Props) => {
   );
 };
 
-export const Tooltip = ({ className, layout, ...rest }: Props) => (
+export const Tooltip = ({ vfx, ...rest }: Props) => (
   <UnstyledTooltip
-    className={classNames("aui-tooltip", className)}
-    layout={{ padding: "s", ...layout }}
+    vfx={{
+      padding: "s",
+      backgroundColor: "default",
+      border: true,
+      shadow: "floating",
+      radius: "rounded",
+      z: "floating",
+      ...vfx,
+    }}
     {...rest}
   />
 );

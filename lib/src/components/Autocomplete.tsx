@@ -1,6 +1,6 @@
 import React from "react";
 import Popover from "./Popover";
-import { Box, ClickOutside, IconInput } from "@adamjanicki/ui";
+import { Box, ClickOutside, IconInput, ui } from "@adamjanicki/ui";
 import { classNames } from "@adamjanicki/ui/functions";
 
 type Props<T> = {
@@ -73,11 +73,11 @@ type Props<T> = {
   /**
    * Props for the list element
    */
-  listProps?: React.ComponentProps<"ul">;
+  listProps?: React.ComponentProps<typeof ui.ul>;
   /**
    * Props for the list item elements
    */
-  listItemProps?: React.ComponentProps<"li">;
+  listItemProps?: React.ComponentProps<typeof ui.li>;
   /**
    * Footer node to render at the bottom of the popover
    */
@@ -99,7 +99,7 @@ type Props<T> = {
 };
 
 const defaultRenderOption = <T,>(option: T) => (
-  <Box layout={{ padding: "s" }}>{`${option}`}</Box>
+  <Box vfx={{ padding: "s" }}>{`${option}`}</Box>
 );
 
 const Autocomplete = <T,>(props: Props<T>) => {
@@ -242,52 +242,65 @@ const Autocomplete = <T,>(props: Props<T>) => {
           {...popoverProps}
           open={popoverOpen}
           triggerRef={inputContainerRef}
-          layout={{ padding: "none", margin: "none" }}
+          vfx={{
+            padding: "none",
+            margin: "none",
+            overflow: "hidden",
+            fontWeight: 4,
+          }}
           style={{
             ...popoverProps?.style,
             width: inputContainerRef.current?.offsetWidth ?? 0,
           }}
-          className={classNames(
-            "aui-autocomplete-popover",
-            popoverProps?.className
-          )}
         >
-          <ul
+          <ui.ul
             {...listProps}
-            className={classNames(
-              "aui-autocomplete-ul aui-pa-s aui-ma-none",
-              listProps.className
-            )}
+            vfx={{
+              axis: "y",
+              padding: "s",
+              margin: "none",
+              overflow: "scroll",
+              ...listProps.vfx,
+            }}
+            style={{ maxHeight: 300, ...listProps.style }}
+            tabIndex={-1}
           >
-            {filteredOptions.length
-              ? filteredOptions.map((option, index) => {
-                  const group = groupMap.get(index);
-                  const ref = index === on ? onRef : undefined;
+            <>
+              {filteredOptions.length
+                ? filteredOptions.map((option, index) => {
+                    const group = groupMap.get(index);
+                    const ref = index === on ? onRef : undefined;
 
-                  return (
-                    <React.Fragment key={index}>
-                      {group && (renderGroup?.(group) || group)}
-                      <li
-                        {...listItemProps}
-                        ref={ref}
-                        onMouseEnter={() => setOn(index)}
-                        className={classNames(
-                          `aui-autocomplete-li`,
-                          on === index
-                            ? "aui-autocomplete-on-option"
-                            : undefined,
-                          listItemProps.className
-                        )}
-                        onClick={() => handleChange(option)}
-                      >
-                        {renderOption(option)}
-                      </li>
-                    </React.Fragment>
-                  );
-                })
-              : !freeSolo &&
-                (noOptionsNode || defaultRenderOption("No results found"))}
-          </ul>
+                    return (
+                      <React.Fragment key={index}>
+                        {group && (renderGroup?.(group) || group)}
+                        <ui.li
+                          {...listItemProps}
+                          vfx={{
+                            axis: "x",
+                            cursor: "pointer",
+                            radius: "rounded",
+                            ...listItemProps.vfx,
+                          }}
+                          ref={ref}
+                          onMouseEnter={() => setOn(index)}
+                          className={classNames(
+                            on === index
+                              ? "aui-autocomplete-on-option"
+                              : undefined,
+                            listItemProps.className
+                          )}
+                          onClick={() => handleChange(option)}
+                        >
+                          <>{renderOption(option)}</>
+                        </ui.li>
+                      </React.Fragment>
+                    );
+                  })
+                : !freeSolo &&
+                  (noOptionsNode || defaultRenderOption("No results found"))}
+            </>
+          </ui.ul>
           {!!footer && (
             <Box onClick={closeOnFooterClick ? closeMenu : undefined}>
               <>{footer}</>
